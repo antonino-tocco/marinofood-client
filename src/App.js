@@ -1,26 +1,59 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Redirect, Switch} from 'react-router-dom';
+import { Route, Router } from 'react-router';
+import PropTypes from 'prop-types';
+
+import { history } from './helpers/history';
+import { userHelper } from './helpers/userHelper';
+
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+
 import './App.css';
+
+
+const PrivateRoute = ({ component: Component, redirectTo, ...rest }) => (
+    <Route
+        {...rest}
+        render={props =>
+            userHelper.isAuthenticated()
+                ? <Component {...props} />
+                : <Redirect to={{ pathname: "/login" }} />}
+    />
+);
+
+const LoginRoute = ({ component: Component, redirectTo, ...rest}) => (
+    <Route
+        {...rest}
+        render={props =>
+            userHelper.isAuthenticated()
+                ? <Redirect to={{ pathname: redirectTo }} />:
+                <Component {...props} />
+        }
+    />
+);
+
+PrivateRoute.propTypes = {
+  //auth: PropTypes.object.isRequired,
+  component: PropTypes.func.isRequired
+}
+
+LoginRoute.propTypes = {
+  component: PropTypes.func.isRequired
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router history={history}>
+          <div>
+              <Switch>
+                  <Route exact path='index.html' />
+                  <LoginRoute path='/login' component={Login} redirectTo='/dashboard'/>
+                  <PrivateRoute path='/dashboard' component={Dashboard}/>
+              </Switch>
+          </div>
+      </Router>
     );
   }
 }
