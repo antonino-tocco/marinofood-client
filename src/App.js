@@ -9,7 +9,13 @@ import { userHelper } from './helpers/userHelper';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+
+import {theme} from "./helpers/theme";
+
+
 import './App.css';
+
 
 
 const PrivateRoute = ({ component: Component, redirectTo, ...rest }) => (
@@ -46,13 +52,15 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-          <div>
-              <Switch>
-                  <Route exact path='index.html' />
-                  <LoginRoute path='/login' component={Login} redirectTo='/dashboard'/>
-                  <PrivateRoute path='/dashboard' component={Dashboard}/>
-              </Switch>
-          </div>
+          <MuiThemeProvider theme={theme}>
+              <div className='container main-container'>
+                  <Switch>
+                      <Route exact path='/' />
+                      <LoginRoute path='/login' component={Login} redirectTo='/dashboard'/>
+                      <PrivateRoute path='/dashboard' component={Dashboard}/>
+                  </Switch>
+              </div>
+          </MuiThemeProvider>
       </Router>
     );
   }

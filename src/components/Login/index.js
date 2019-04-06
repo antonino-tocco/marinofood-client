@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import FormLogin from './components/FormLogin';
 
-import { store } from '../../helpers/store';
+import './index.scss';
 
 class Login extends React.Component{
     constructor(props) {

@@ -4,7 +4,6 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import { theme } from '../../../helpers/theme';
 import { store } from '../../../helpers/store';
 
 
@@ -96,46 +95,40 @@ class FormLogin extends  React.Component {
 
     render() {
         return (
-            <div>
-                <MuiThemeProvider muiTheme={theme}>
-                    <div>
-                        <div className="logo_form_login">
-                            <img src='' />
-                        </div>
-                        <div className="center_form_login">
-                            <div className="title_form_login">Insert your Email adress and Password to access your private area</div>
-                            <TextField
-                                FormLabelClasses={{
-                                    root: style.cssLabel,
-                                    focused: style.cssFocused,
-                                }}
-                                hintText="Enter your email"
-                                name="email"
-                                floatingLabelText="E-mail"
-                                onChange={this.onFieldChange}
-                                //errorText={this.state.error.email ? globalConstants.errorText.default : ''}
-                                fullWidth={true}/>
-                            <br/>
-                            <TextField
-                                hintText="Enter your password"
-                                name="password"
-                                floatingLabelText="Password"
-                                onChange={this.onFieldChange}
-                                //errorText={this.state.error.password ? globalConstants.errorText.default : ''}
-                                fullWidth={true}
-                                type="password"/>
-                            <br/><br />
-                            <div className="row actions_form_login">
-                                <div className="col-md-6">
-                                    <a className="reset_link_form_login" href="">RESET PASSWORD</a>
-                                </div>
-                                <div className="col-md-6">
-                                    <Button variant="contained" label="SIGN IN" size="large"  secondary={true} onClick={(event) => this.onSubmit()} fullWidth={true} disabled={this.state.actionDisabled}/>
-                                </div>
+            <div className='form form-login'>
+                <div>
+                    <div className="logo_form_login">
+                        <img src='' />
+                    </div>
+                    <div className="center_form_login">
+                        <div className="title_form_login">Insert your Email adress and Password to access your private area</div>
+                        <TextField
+                            helperText="Enter your email"
+                            name="email"
+                            label="E-mail"
+                            onChange={this.onFieldChange}
+                            //errorText={this.state.error.email ? globalConstants.errorText.default : ''}
+                            fullWidth={true}/>
+                        <br/>
+                        <TextField
+                            helperText="Enter your password"
+                            name="password"
+                            label="Password"
+                            onChange={this.onFieldChange}
+                            //errorText={this.state.error.password ? globalConstants.errorText.default : ''}
+                            fullWidth={true}
+                            type="password"/>
+                        <br/><br />
+                        <div className="row actions_form_login">
+                            <div className="col-md-6">
+                                <a className="reset_link" href="">RESET PASSWORD</a>
+                            </div>
+                            <div className="col-md-6">
+                                <Button variant="contained" size="large"  onClick={(event) => this.onSubmit()} fullWidth={true} disabled={this.state.actionDisabled}>SIGN IN</Button>
                             </div>
                         </div>
                     </div>
-                </MuiThemeProvider>
+                </div>
             </div>
         )
     }

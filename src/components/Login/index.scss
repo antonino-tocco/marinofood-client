@@ -1,0 +1,20 @@
+.form-login {
+  position: absolute;
+  display: block;
+  width: 400px;
+  left: 50%;
+  top: 50%;
+  margin: 0 auto;
+  background: #FFF;
+  box-shadow: 1px 1px 10px #333;
+  padding: 40px 40px;
+  transform: translate(-50%, -50%);
+}
+
+.form-login {
+  .reset_link {
+    display: block;
+    text-align: center;
+    height: 100%;
+  }
+}
